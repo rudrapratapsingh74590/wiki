@@ -5,72 +5,218 @@ import { motion } from "framer-motion";
 import { FaEnvelope } from "react-icons/fa";
 import { toast } from "sonner";
 
-
 const NewsletterForm = () => {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
 
     try {
-      fetch('/api/newsletter', {
-        method: 'POST',
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
 
-      setTimeout(() => {
-        toast.success("Thanks for subscribing! You'll hear from us soon.");
-        setEmail("");
-        setSubmitting(false);
-      }, 2000);
+      if (!response.ok) {
+        throw new Error("Subscription failed");
+      }
+
+      toast.success("Thanks for subscribing! You'll hear from us soon.");
+      setEmail("");
     } catch (error) {
-      console.error("Error submitting newsletter form:", error);
+      console.error(error);
       toast.error("Something went wrong. Please try again later.");
+    } finally {
       setSubmitting(false);
     }
   };
 
   return (
     <motion.div
-      className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg p-6 flex flex-col items-start lg:col-span-2"
-      whileHover={{ y: -3, scale: 1.009 }}
-      transition={{ type: "spring", stiffness: 300 }}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
+      className="relative h-full w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 via-gray-900 to-slate-800 p-7 shadow-sm"
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.15,
+      }}
+      transition={{
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      whileHover={{
+        y: -5,
+      }}
     >
-      <div className="mb-4">
-        <FaEnvelope className="text-white text-4xl" />
-      </div>
-      <h3 className="text-xl font-bold text-white mb-2">Subscribe to our Newsletter</h3>
-      <p className="text-gray-400 mb-4 flex-grow">Get the latest news and updates from our community.</p>
-      <form className="w-full" onSubmit={handleSubmit}>
-        <div className="flex items-center space-x-2">
+      {/* Decorative glow */}
+      <motion.div
+        className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-sky-500/10 blur-3xl"
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.4, 0.65, 0.4],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-cyan-500/10 blur-3xl"
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.55, 0.3],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <div className="relative z-10">
+        {/* Icon */}
+        <motion.div
+          className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-sky-400"
+          initial={{
+            opacity: 0,
+            scale: 0.9,
+          }}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.5,
+            delay: 0.15,
+          }}
+          whileHover={{
+            scale: 1.06,
+            rotate: -3,
+          }}
+        >
+          <FaEnvelope className="text-2xl" />
+        </motion.div>
+
+        {/* Content */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 10,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.5,
+            delay: 0.2,
+          }}
+        >
+          <h3 className="mt-6 text-xl font-bold text-white">
+            Subscribe to our Newsletter
+          </h3>
+
+          <p className="mt-3 text-sm leading-6 text-gray-400">
+            Get the latest news, events, learning opportunities, and updates
+            from our community.
+          </p>
+        </motion.div>
+
+        {/* Form */}
+        <motion.form
+          onSubmit={handleSubmit}
+          className="mt-6 w-full"
+          initial={{
+            opacity: 0,
+            y: 10,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.5,
+            delay: 0.3,
+          }}
+        >
+          <label htmlFor="newsletter-email" className="sr-only">
+            Email address
+          </label>
+
           <input
+            id="newsletter-email"
             type="email"
             name="email"
-            placeholder="Enter your email"
-            className="w-full px-4 py-3 border-2 border-gray-700 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-base"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            aria-label="Email address"
             required
             disabled={submitting}
+            className="block w-full box-border rounded-xl border border-gray-700 bg-gray-800/80 px-4 py-3.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 disabled:cursor-not-allowed disabled:opacity-60"
           />
+
           <motion.button
             type="submit"
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-            whileHover={{ scale: 1.05, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)" }}
-            whileTap={{ scale: 0.95 }}
             disabled={submitting}
+            className="mt-3 block w-full rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 px-4 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky-900/20 transition-all duration-200 hover:from-cyan-400 hover:to-sky-400 disabled:cursor-not-allowed disabled:opacity-50"
+            whileHover={{
+              scale: submitting ? 1 : 1.02,
+            }}
+            whileTap={{
+              scale: submitting ? 1 : 0.98,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 20,
+            }}
           >
             {submitting ? "Subscribing..." : "Subscribe"}
           </motion.button>
-        </div>
-      </form>
+        </motion.form>
+
+        <motion.p
+          className="mt-4 text-xs text-gray-500"
+          initial={{
+            opacity: 0,
+          }}
+          whileInView={{
+            opacity: 1,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.5,
+            delay: 0.4,
+          }}
+        >
+          Stay updated without the noise.
+        </motion.p>
+      </div>
     </motion.div>
   );
 };

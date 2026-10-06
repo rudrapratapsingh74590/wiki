@@ -1,111 +1,243 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  FaInstagram,
+  FaLinkedin,
+  FaEnvelope,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className='bg-gray-900 text-white'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8'>
-          <div className='space-y-4'>
-            <Link href='/' className='flex items-center space-x-2'>
-              <Image
-                src='/logo.svg'
-                alt='WikiClub Tech Logo'
-                width={48}
-                height={48}
-                className='h-12 w-auto'
-              />
-              <div>
-                <h1 className='text-xl font-bold text-white'>WikiClub Tech</h1>
-                <p className='text-sm text-gray-400'>United University</p>
-              </div>
-            </Link>
-            <p className='text-gray-400'>
-              A community of tech enthusiasts and learners.
-            </p>
-          </div>
-          <div>
-            <h3 className='text-lg font-semibold'>Quick Links</h3>
-            <ul className='mt-4 space-y-2'>
-              <li>
-                <Link href='/' className='hover:text-gray-300'>
+    <footer className="bg-[#0b2540] text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* ================================
+            MAIN FOOTER
+        ================================= */}
+        <div className="py-14 md:py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+
+            {/* ================================
+                BRAND
+            ================================= */}
+            <div>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-3"
+              >
+                <Image
+                  src="/logo.svg"
+                  alt="WikiClub Tech Logo"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 object-contain"
+                />
+
+                <div>
+                  <h2 className="text-xl font-bold text-white">
+                    WikiClub Tech
+                  </h2>
+
+                  <p className="text-sm text-slate-300">
+                    United University
+                  </p>
+                </div>
+              </Link>
+
+              <p className="mt-5 max-w-xs text-sm leading-6 text-slate-300">
+                A community of tech enthusiasts and learners building,
+                learning, and contributing together.
+              </p>
+            </div>
+
+            {/* ================================
+                QUICK LINKS
+            ================================= */}
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
+                Quick Links
+              </h3>
+
+              <div className="mt-5 flex flex-col gap-3">
+                <Link
+                  href="/"
+                  className="text-sm text-slate-300 hover:text-cyan-300 transition-colors"
+                >
                   Home
                 </Link>
-              </li>
-              <li>
-                <Link href='/blogs' className='hover:text-gray-300'>
+
+                <Link
+                  href="/blogs"
+                  className="text-sm text-slate-300 hover:text-cyan-300 transition-colors"
+                >
                   Blogs
                 </Link>
-              </li>
-              <li>
-                <Link href='/teams' className='hover:text-gray-300'>
+
+                <Link
+                  href="/teams"
+                  className="text-sm text-slate-300 hover:text-cyan-300 transition-colors"
+                >
                   Teams
                 </Link>
-              </li>
-              <li>
+
                 <Link
-                  href='https://forms.gle/FGoyrEHC1CuP9hPSA'
-                  className='hover:text-gray-300'
+                  href="/validator"
+                  className="text-sm text-slate-300 hover:text-cyan-300 transition-colors"
                 >
-                  Join Us
+                  Validator
                 </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className='text-lg font-semibold'>Legal</h3>
-            <ul className='mt-4 space-y-2'>
-              <li>
-                <Link href='/privacy-policy' className='hover:text-gray-300'>
+
+                <Link
+                  href="/contributors"
+                  className="text-sm text-slate-300 hover:text-cyan-300 transition-colors"
+                >
+                  Contribution Board
+                </Link>
+              </div>
+            </div>
+
+            {/* ================================
+                RESOURCES
+            ================================= */}
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
+                Resources
+              </h3>
+
+              <div className="mt-5 flex flex-col gap-3">
+                <Link
+                  href="/pyq"
+                  className="text-sm text-slate-300 hover:text-cyan-300 transition-colors"
+                >
+                  PYQ
+                </Link>
+
+                <Link
+                  href="/privacy-policy"
+                  className="text-sm text-slate-300 hover:text-cyan-300 transition-colors"
+                >
                   Privacy Policy
                 </Link>
-              </li>
-              <li>
-                <Link href='/terms-of-service' className='hover:text-gray-300'>
+
+                <Link
+                  href="/terms-of-service"
+                  className="text-sm text-slate-300 hover:text-cyan-300 transition-colors"
+                >
                   Terms of Service
                 </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className='text-lg font-semibold'>Contact & Follow</h3>
-            <ul className='mt-4 space-y-2'>
-              <li>
-                <a
-                  href='mailto:wikiclub@united.edu.in'
-                  className='hover:text-gray-300'
-                >
-                  wikiclub@united.edu.in
-                </a>
-              </li>
-            </ul>
-            <div className='flex mt-4 space-x-4'>
-              <a
-                href='https://www.instagram.com/wikiclubtech.uu/'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='hover:text-gray-300 transform hover:scale-110 transition-transform duration-200'
-              >
-                Instagram
-              </a>
-              <a
-                href='https://www.linkedin.com/company/wikiclubtechuu/'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='hover:text-gray-300 transform hover:scale-110 transition-transform duration-200'
-              >
-                LinkedIn
-              </a>
+              </div>
             </div>
+
+            {/* ================================
+                CONTACT & FOLLOW
+            ================================= */}
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
+                Contact & Follow
+              </h3>
+
+              {/* Email */}
+              <a
+                href="mailto:wikiclub@united.edu.in"
+                className="
+                  mt-5
+                  inline-flex
+                  items-center
+                  gap-3
+                  text-sm
+                  text-slate-300
+                  hover:text-cyan-300
+                  transition-colors
+                "
+              >
+                <FaEnvelope />
+                <span>wikiclub@united.edu.in</span>
+              </a>
+
+              {/* Social Links */}
+              <div className="flex items-center gap-3 mt-6">
+
+                {/* Instagram */}
+                <a
+                  href="https://www.instagram.com/wikiclubtech.uu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="
+                    flex
+                    items-center
+                    justify-center
+                    w-10
+                    h-10
+                    rounded-full
+                    bg-[#163a5c]
+                    text-slate-300
+                    hover:bg-pink-600
+                    hover:text-white
+                    hover:-translate-y-1
+                    transition-all
+                    duration-300
+                  "
+                >
+                  <FaInstagram className="text-lg" />
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href="https://www.linkedin.com/company/wikiclubtechuu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="
+                    flex
+                    items-center
+                    justify-center
+                    w-10
+                    h-10
+                    rounded-full
+                    bg-[#163a5c]
+                    text-slate-300
+                    hover:bg-blue-600
+                    hover:text-white
+                    hover:-translate-y-1
+                    transition-all
+                    duration-300
+                  "
+                >
+                  <FaLinkedin className="text-lg" />
+                </a>
+
+              </div>
+            </div>
+
           </div>
         </div>
-        <div className='mt-8 border-t border-gray-800 pt-8 text-center'>
-          <p>
-            &copy; {new Date().getFullYear()} WikiClub Tech. All rights
-            reserved.
-          </p>
+
+        {/* ================================
+            BOTTOM BAR
+        ================================= */}
+        <div className="border-t border-[#234563] py-6">
+
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+
+            <p className="text-sm text-slate-400 text-center md:text-left">
+              © {new Date().getFullYear()} WikiClub Tech. All rights reserved.
+            </p>
+
+            <p className="text-sm text-slate-400">
+              Built with{" "}
+              <span className="font-medium text-cyan-300">
+                community & collaboration
+              </span>
+            </p>
+
+          </div>
+
         </div>
+
       </div>
     </footer>
   );
