@@ -8,9 +8,7 @@ import { ArrowRight } from "lucide-react";
 const HeroContent = () => {
   return (
     <div className="relative z-10 w-full">
-
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-
         <div
           className="
             min-h-[620px]
@@ -24,11 +22,6 @@ const HeroContent = () => {
             lg:py-24
           "
         >
-
-          {/* =========================
-              LOGO
-          ========================== */}
-
           <motion.div
             initial={{
               opacity: 0,
@@ -60,10 +53,6 @@ const HeroContent = () => {
               "
             />
           </motion.div>
-
-          {/* =========================
-              SMALL LABEL
-          ========================== */}
 
           <motion.div
             initial={{
@@ -104,10 +93,6 @@ const HeroContent = () => {
             <span className="h-[2px] w-8 bg-[#19b99a]" />
           </motion.div>
 
-          {/* =========================
-              MAIN HEADING
-          ========================== */}
-
           <motion.h1
             initial={{
               opacity: 0,
@@ -123,26 +108,22 @@ const HeroContent = () => {
               ease: "easeOut",
             }}
             className="
-              max-w-5xl
-              text-5xl
-              sm:text-6xl
-              md:text-7xl
-              lg:text-8xl
+              max-w-full
+              text-[48px]
+              sm:text-[56px]
+              md:text-[64px]
+              lg:text-[72px]
               font-extrabold
               tracking-[-0.04em]
               leading-[0.95]
               text-[#071827]
+              whitespace-nowrap
             "
           >
-            Build.
-            <span className="text-[#1689d8]"> Learn.</span>
-            <br />
-            <span className="text-[#19a36f]">Contribute.</span>
+            Build
+            <span className="text-[#1689d8]"> Learn</span>
+            <span className="text-[#19a36f]"> Contribute</span>
           </motion.h1>
-
-          {/* =========================
-              DESCRIPTION
-          ========================== */}
 
           <motion.p
             initial={{
@@ -161,9 +142,9 @@ const HeroContent = () => {
             className="
               mt-7
               max-w-3xl
-              text-base
-              sm:text-lg
-              md:text-xl
+              text-[20px]
+              lg:text-[24px]
+              font-bold
               leading-relaxed
               text-[#3f5265]
             "
@@ -172,10 +153,6 @@ const HeroContent = () => {
             learning together, building meaningful projects, and contributing
             to open knowledge.
           </motion.p>
-
-          {/* =========================
-              BUTTONS
-          ========================== */}
 
           <motion.div
             initial={{
@@ -201,9 +178,6 @@ const HeroContent = () => {
               gap-4
             "
           >
-
-            {/* JOIN COMMUNITY */}
-
             <motion.a
               href="https://forms.gle/FGoyrEHC1CuP9hPSA"
               target="_blank"
@@ -247,8 +221,6 @@ const HeroContent = () => {
               />
             </motion.a>
 
-            {/* EXPLORE */}
-
             <motion.a
               href="#what-we-do"
               whileHover={{
@@ -289,9 +261,7 @@ const HeroContent = () => {
 
               <ArrowRight size={17} />
             </motion.a>
-
           </motion.div>
-
         </div>
       </div>
     </div>
