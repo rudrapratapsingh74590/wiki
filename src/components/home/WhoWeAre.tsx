@@ -15,10 +15,15 @@ const stats = {
 const WhoWeAre = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+
   const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
-    setMousePosition({ x: ((event.clientX - rect.left) / rect.width) * 100, y: ((event.clientY - rect.top) / rect.height) * 100 });
+    setMousePosition({
+      x: ((event.clientX - rect.left) / rect.width) * 100,
+      y: ((event.clientY - rect.top) / rect.height) * 100,
+    });
   };
+
   return (
     <section className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
@@ -71,23 +76,41 @@ const WhoWeAre = () => {
               onMouseMove={handleMouseMove}
               onMouseLeave={() => setIsHovered(false)}
               whileHover={{ y: -6 }}
-              className="group w-full max-w-[180px] rounded-2xl border border-slate-100 bg-[#f7fbff] px-5 py-7 text-center shadow-sm transition-transform duration-300"
+              className="group relative w-full max-w-[320px] min-h-[280px] rounded-3xl border border-slate-100 bg-[#f7fbff] px-8 py-10 text-center shadow-sm transition-transform duration-300"
             >
-              <div className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-200" style={{ opacity: isHovered ? 1 : 0, background: "radial-gradient(190px circle at " + mousePosition.x + "% " + mousePosition.y + "%, rgba(96, 165, 250, 0.11), transparent 72%)" }} />
-              <div className="relative z-10">
               <div
-                className={`mx-auto flex h-12 w-12 items-center justify-center rounded-full ${stats.iconBg} ${stats.iconColor}`}
-              >
-                <stats.icon size={22} strokeWidth={2} />
+                className="pointer-events-none absolute inset-0 z-0 rounded-3xl transition-opacity duration-200"
+                style={{
+                  opacity: isHovered ? 1 : 0,
+                  background:
+                    "radial-gradient(220px circle at " +
+                    mousePosition.x +
+                    "% " +
+                    mousePosition.y +
+                    "%, rgba(96, 165, 250, 0.11), transparent 72%)",
+                }}
+              />
+
+              <div className="relative z-10 flex h-full flex-col items-center justify-center">
+                <div
+                  className={
+                    "mx-auto flex h-16 w-16 items-center justify-center rounded-full " +
+                    stats.iconBg +
+                    " " +
+                    stats.iconColor
+                  }
+                >
+                  <stats.icon size={28} strokeWidth={2} />
+                </div>
+
+                <h3 className="mt-6 text-4xl font-extrabold text-[#0b2540]">
+                  {stats.value}
+                </h3>
+
+                <p className="mt-3 text-sm font-medium text-slate-500">
+                  {stats.label}
+                </p>
               </div>
-
-              <h3 className="mt-5 text-2xl font-extrabold text-[#0b2540]">
-                {stats.value}
-              </h3>
-
-              <p className="mt-2 text-xs leading-5 text-slate-500">
-                {stats.label}
-              </p>
             </motion.div>
           </div>
         </div>
