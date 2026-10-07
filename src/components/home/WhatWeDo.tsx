@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { MouseEvent, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -55,6 +55,12 @@ const activities = [
 ];
 
 const WhatWeDo = () => {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [mousePositions, setMousePositions] = useState<Record<number, { x: number; y: number }>>({});
+  const handleMouseMove = (event: MouseEvent<HTMLDivElement>, index: number) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setMousePositions((previous) => ({ ...previous, [index]: { x: ((event.clientX - rect.left) / rect.width) * 100, y: ((event.clientY - rect.top) / rect.height) * 100 } }));
+  };
   return (
     <section
       id="what-we-do"
@@ -101,6 +107,7 @@ const WhatWeDo = () => {
 
           {activities.map((activity, index) => {
             const Icon = activity.icon;
+            const position = mousePositions[index] || { x: 50, y: 50 };
 
             return (
               <motion.div
@@ -121,6 +128,10 @@ const WhatWeDo = () => {
                   duration: 0.55,
                   delay: index * 0.08,
                 }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseMove={(event) => handleMouseMove(event, index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                whileHover={{ y: -6 }}
                 className="
                   group
                   relative
@@ -130,12 +141,13 @@ const WhatWeDo = () => {
                   bg-white
                   p-6
                   shadow-sm
-                  hover:-translate-y-1.5
-                  hover:shadow-lg
-                  transition-all
+                  transition-transform
                   duration-300
                 "
               >
+                <div className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-200" style={{ opacity: hoveredCard === index ? 1 : 0, background: "radial-gradient(190px circle at " + position.x + "% " + position.y + "%, rgba(96, 165, 250, 0.11), transparent 72%)" }} />
+
+                <div className="relative z-10">
 
                 {/* Icon */}
                 <div
@@ -148,9 +160,6 @@ const WhatWeDo = () => {
                     rounded-xl
                     ${activity.iconBg}
                     ${activity.iconColor}
-                    transition-transform
-                    duration-300
-                    group-hover:scale-105
                   `}
                 >
                   <Icon size={23} strokeWidth={2} />

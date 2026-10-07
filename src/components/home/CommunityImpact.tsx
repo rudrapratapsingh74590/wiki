@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { MouseEvent, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaUsers,
@@ -45,6 +45,18 @@ const impactItems = [
 ];
 
 const CommunityImpact = () => {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [mousePositions, setMousePositions] = useState<Record<number, { x: number; y: number }>>({});
+  const [valuesHovered, setValuesHovered] = useState(false);
+  const [valuesMousePosition, setValuesMousePosition] = useState({ x: 50, y: 50 });
+  const handleMouseMove = (event: MouseEvent<HTMLDivElement>, index: number) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setMousePositions((previous) => ({ ...previous, [index]: { x: ((event.clientX - rect.left) / rect.width) * 100, y: ((event.clientY - rect.top) / rect.height) * 100 } }));
+  };
+  const handleValuesMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setValuesMousePosition({ x: ((event.clientX - rect.left) / rect.width) * 100, y: ((event.clientY - rect.top) / rect.height) * 100 });
+  };
   return (
     <section className="relative bg-[#effbf8] py-20 md:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -123,6 +135,7 @@ const CommunityImpact = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {impactItems.map((item, index) => {
             const Icon = item.icon;
+            const position = mousePositions[index] || { x: 50, y: 50 };
 
             return (
               <motion.article
@@ -136,8 +149,7 @@ const CommunityImpact = () => {
                   border-[#e1f0ec]
                   p-7
                   shadow-sm
-                  hover:shadow-lg
-                  transition-shadow
+                  transition-transform
                   duration-300
                   overflow-hidden
                 "
@@ -158,58 +170,17 @@ const CommunityImpact = () => {
                   delay: index * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                whileHover={{
-                  y: -5,
-                }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseMove={(event) => handleMouseMove(event, index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                whileHover={{ y: -6 }}
               >
-                {/* Top Accent */}
-                <motion.div
-                  className="
-                    absolute
-                    top-0
-                    left-0
-                    h-1
-                    bg-gradient-to-r
-                    from-[#19b99a]
-                    to-[#1689d8]
-                  "
-                  initial={{
-                    width: 0,
-                  }}
-                  whileHover={{
-                    width: "100%",
-                  }}
-                  transition={{
-                    duration: 0.35,
-                    ease: "easeOut",
-                  }}
-                />
+                <div className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-200" style={{ opacity: hoveredCard === index ? 1 : 0, background: "radial-gradient(190px circle at " + position.x + "% " + position.y + "%, rgba(96, 165, 250, 0.11), transparent 72%)" }} />
 
                 {/* Icon */}
-                <motion.div
-                  className={`
-                    flex
-                    items-center
-                    justify-center
-                    w-14
-                    h-14
-                    rounded-2xl
-                    ${item.iconBg}
-                    ${item.iconColor}
-                    mb-6
-                  `}
-                  whileHover={{
-                    scale: 1.06,
-                    rotate: 2,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 280,
-                    damping: 18,
-                  }}
-                >
+                <div className={`flex items-center justify-center w-14 h-14 rounded-2xl ${item.iconBg} ${item.iconColor} mb-6`}>
                   <Icon className="text-2xl" />
-                </motion.div>
+                </div>
 
                 {/* Title */}
                 <h3 className="text-lg font-bold text-[#0b2540] mb-3">
@@ -258,7 +229,12 @@ const CommunityImpact = () => {
             delay: 0.15,
             ease: [0.22, 1, 0.36, 1],
           }}
+          onMouseEnter={() => setValuesHovered(true)}
+          onMouseMove={handleValuesMouseMove}
+          onMouseLeave={() => setValuesHovered(false)}
+          whileHover={{ y: -6 }}
         >
+          <div className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-200" style={{ opacity: valuesHovered ? 1 : 0, background: "radial-gradient(190px circle at " + valuesMousePosition.x + "% " + valuesMousePosition.y + "%, rgba(96, 165, 250, 0.11), transparent 72%)" }} />
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
 
             {/* Text */}
@@ -294,14 +270,7 @@ const CommunityImpact = () => {
                 border
                 border-[#cfeee6]
               "
-              whileHover={{
-                scale: 1.05,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 250,
-                damping: 18,
-              }}
+
             >
               <FaUsers className="text-2xl text-[#19b99a]" />
             </motion.div>

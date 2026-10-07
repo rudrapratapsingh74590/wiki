@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { MouseEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { Code2, ArrowRight } from "lucide-react";
 
@@ -13,6 +13,12 @@ const stats = {
 };
 
 const WhoWeAre = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+  const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setMousePosition({ x: ((event.clientX - rect.left) / rect.width) * 100, y: ((event.clientY - rect.top) / rect.height) * 100 });
+  };
   return (
     <section className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
@@ -61,8 +67,14 @@ const WhoWeAre = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5 }}
-              className="group w-full max-w-[180px] rounded-2xl border border-slate-100 bg-[#f7fbff] px-5 py-7 text-center shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={() => setIsHovered(false)}
+              whileHover={{ y: -6 }}
+              className="group w-full max-w-[180px] rounded-2xl border border-slate-100 bg-[#f7fbff] px-5 py-7 text-center shadow-sm transition-transform duration-300"
             >
+              <div className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-200" style={{ opacity: isHovered ? 1 : 0, background: "radial-gradient(190px circle at " + mousePosition.x + "% " + mousePosition.y + "%, rgba(96, 165, 250, 0.11), transparent 72%)" }} />
+              <div className="relative z-10">
               <div
                 className={`mx-auto flex h-12 w-12 items-center justify-center rounded-full ${stats.iconBg} ${stats.iconColor}`}
               >
