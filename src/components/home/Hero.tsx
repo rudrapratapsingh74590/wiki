@@ -28,27 +28,34 @@ const Hero = () => {
         `,
       }}
     >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(
-              rgba(100, 116, 139, 0.10) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              90deg,
-              rgba(100, 116, 139, 0.10) 1px,
-              transparent 1px
-            )
-          `,
-          backgroundSize: "52px 52px",
-          backgroundPosition: "center center",
-          maskImage: "linear-gradient(to bottom, black 75%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, black 75%, transparent)",
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(
+                rgba(100, 116, 139, 0.07) 1px,
+                transparent 1px
+              ),
+              linear-gradient(
+                90deg,
+                rgba(100, 116, 139, 0.07) 1px,
+                transparent 1px
+              )
+            `,
+            backgroundSize: "52px 52px",
+            backgroundPosition: "center center",
+          }}
+        />
+
+        <div
+          className="absolute inset-x-0 bottom-0 h-[240px]"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 45%, rgba(255,255,255,0.32) 100%)",
+          }}
+        />
+      </div>
 
       <HeroContent />
     </section>

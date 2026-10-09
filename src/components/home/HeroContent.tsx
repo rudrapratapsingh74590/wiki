@@ -18,7 +18,8 @@ const HeroContent = () => {
             items-center
             justify-center
             text-center
-            py-20
+            py-16
+            sm:py-20
             lg:py-24
           "
         >
@@ -35,7 +36,7 @@ const HeroContent = () => {
               duration: 0.7,
               ease: "easeOut",
             }}
-            className="mb-8"
+            className="mb-7 sm:mb-8"
           >
             <Image
               src="/WikiClub_New.png"
@@ -46,7 +47,7 @@ const HeroContent = () => {
               className="
                 w-auto
                 h-auto
-                max-w-[220px]
+                max-w-[190px]
                 sm:max-w-[280px]
                 lg:max-w-[320px]
                 object-contain
@@ -71,26 +72,29 @@ const HeroContent = () => {
               flex
               items-center
               justify-center
-              gap-3
+              gap-2
+              sm:gap-3
               mb-5
             "
           >
-            <span className="h-[2px] w-8 bg-[#1689d8]" />
+            <span className="h-[2px] w-6 sm:w-8 bg-[#1689d8]" />
 
             <span
               className="
-                text-xs
+                text-[10px]
                 sm:text-sm
                 font-bold
-                tracking-[0.2em]
+                tracking-[0.14em]
+                sm:tracking-[0.2em]
                 uppercase
                 text-[#0b2540]
+                whitespace-nowrap
               "
             >
               WIKICLUBTECH-UU • 2026–27
             </span>
 
-            <span className="h-[2px] w-8 bg-[#19b99a]" />
+            <span className="h-[2px] w-6 sm:w-8 bg-[#19b99a]" />
           </motion.div>
 
           <motion.h1
@@ -109,18 +113,18 @@ const HeroContent = () => {
             }}
             className="
               max-w-full
-              text-[48px]
+              px-2
+              text-[46px]
               sm:text-[56px]
               md:text-[64px]
               lg:text-[72px]
               font-extrabold
-              tracking-[-0.04em]
+              tracking-[-0.045em]
               leading-[0.95]
               text-[#071827]
-              whitespace-nowrap
             "
           >
-            Build
+            <span className="block sm:inline">Build</span>
             <span className="text-[#1689d8]"> Learn</span>
             <span className="text-[#19a36f]"> Contribute</span>
           </motion.h1>
@@ -140,18 +144,21 @@ const HeroContent = () => {
               ease: "easeOut",
             }}
             className="
-              mt-7
-              max-w-3xl
-              text-[20px]
+              mt-6
+              sm:mt-7
+              max-w-2xl
+              px-3
+              text-[18px]
+              sm:text-[20px]
               lg:text-[24px]
               font-bold
-              leading-relaxed
+              leading-[1.5]
+              sm:leading-relaxed
               text-[#3f5265]
             "
           >
-            A student-driven technology community at United University —
-            learning together, building meaningful projects, and contributing
-            to open knowledge.
+            A student-driven tech community at United University, where we
+            learn, build, and contribute together.
           </motion.p>
 
           <motion.div
@@ -169,13 +176,16 @@ const HeroContent = () => {
               ease: "easeOut",
             }}
             className="
-              mt-9
+              mt-8
+              sm:mt-9
               flex
               flex-col
               sm:flex-row
               items-center
               justify-center
-              gap-4
+              gap-3
+              sm:gap-4
+              w-full
             "
           >
             <motion.a
@@ -211,6 +221,9 @@ const HeroContent = () => {
                 transition-all
                 duration-300
                 hover:bg-[#1689d8]
+                w-full
+                max-w-[330px]
+                sm:w-auto
               "
             >
               <span>Join the Community</span>
@@ -255,6 +268,9 @@ const HeroContent = () => {
                 hover:bg-white
                 hover:border-[#1689d8]
                 hover:text-[#1689d8]
+                w-full
+                max-w-[330px]
+                sm:w-auto
               "
             >
               <span>Explore What We Do</span>
