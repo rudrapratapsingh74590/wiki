@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import Images from "@/data/gallery/images";
 
 const images = Images;
@@ -16,7 +17,7 @@ const Gallery = () => {
   });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: globalThis.MouseEvent) => {
       setCursorPosition({
         x: e.clientX,
         y: e.clientY,
@@ -31,43 +32,34 @@ const Gallery = () => {
   }, []);
 
   return (
-    <section className="bg-[#f7fbff] py-20 md:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* =========================
-            SECTION HEADING
-        ========================== */}
+    <section className="bg-[#f7fbff] py-10 sm:py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+        {/* Section Heading */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-12 md:mb-14"
+          className="mx-auto mb-7 max-w-3xl text-center sm:mb-12 md:mb-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Section Label */}
-          <p className="text-sm font-semibold uppercase tracking-wider text-[#19b99a] mb-3">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#19b99a] sm:mb-3 sm:text-sm">
             Our Memories
           </p>
 
-          {/* Heading */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#0b2540] mb-4">
+          <h2 className="mb-3 text-3xl font-bold tracking-tight text-[#0b2540] sm:mb-4 sm:text-4xl md:text-5xl">
             Gallery
           </h2>
 
-          {/* Description */}
-          <p className="text-base sm:text-lg text-[#607087] leading-relaxed">
+          <p className="text-sm leading-relaxed text-[#607087] sm:text-base md:text-lg">
             A glimpse into our community events, workshops, and activities.
           </p>
 
-          {/* Accent Line */}
-          <div className="mt-5 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-[#19b99a] to-[#1689d8]" />
+          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-[#19b99a] to-[#1689d8] sm:mt-5" />
         </motion.div>
 
-        {/* =========================
-            MASONRY GALLERY
-        ========================== */}
+        {/* Responsive Masonry Gallery */}
         <motion.div
-          className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-5"
+          className="columns-2 [column-gap:12px] sm:[column-gap:20px] md:columns-3 lg:columns-4"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.1 }}
@@ -75,41 +67,28 @@ const Gallery = () => {
         >
           {images.map((image, index) => (
             <motion.div
-              key={index}
+              key={`${image.src}-${index}`}
               className="
                 group
                 relative
-                mb-5
+                mb-3
                 break-inside-avoid
                 overflow-hidden
                 rounded-2xl
-                bg-white
-                shadow-sm
                 border
                 border-[#e4edf5]
+                bg-white
+                shadow-sm
+                sm:mb-5
               "
               onMouseEnter={() => setHoveredImage(image.src)}
               onMouseLeave={() => setHoveredImage(null)}
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-                amount: 0.1,
-              }}
-              whileHover={{
-                y: -5,
-              }}
-              transition={{
-                duration: 0.3,
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.3 }}
             >
-
               {/* Image */}
               <div className="relative overflow-hidden">
                 <Image
@@ -117,9 +96,10 @@ const Gallery = () => {
                   alt={image.alt}
                   width={800}
                   height={600}
+                  sizes="(max-width: 639px) 48vw, (max-width: 767px) 45vw, (max-width: 1023px) 30vw, 25vw"
                   className="
-                    w-full
                     h-auto
+                    w-full
                     object-cover
                     transition-transform
                     duration-500
@@ -129,6 +109,7 @@ const Gallery = () => {
 
                 {/* Hover Overlay */}
                 <div
+                  aria-hidden="true"
                   className="
                     absolute
                     inset-0
@@ -137,31 +118,36 @@ const Gallery = () => {
                     via-transparent
                     to-transparent
                     opacity-0
-                    group-hover:opacity-100
                     transition-opacity
                     duration-300
+                    group-hover:opacity-100
                   "
                 />
 
-                {/* Small Gallery Icon */}
+                {/* Gallery Icon */}
                 <div
+                  aria-hidden="true"
                   className="
                     absolute
-                    bottom-4
-                    right-4
+                    bottom-2
+                    right-2
                     flex
+                    h-8
+                    w-8
                     items-center
                     justify-center
-                    w-9
-                    h-9
                     rounded-full
                     bg-white/95
                     text-[#1689d8]
                     opacity-0
-                    group-hover:opacity-100
+                    shadow-md
                     transition-all
                     duration-300
-                    shadow-md
+                    group-hover:opacity-100
+                    sm:bottom-4
+                    sm:right-4
+                    sm:h-9
+                    sm:w-9
                   "
                 >
                   <span className="text-lg">+</span>
@@ -171,43 +157,67 @@ const Gallery = () => {
           ))}
         </motion.div>
 
-        {/* =========================
-            BOTTOM MESSAGE
-        ========================== */}
+        {/* See More Button */}
         <motion.div
-          className="text-center mt-10"
+          className="mt-6 flex justify-center sm:mt-8"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <p className="text-sm text-[#718198]">
-            More memories from the WikiClub Tech community coming soon.
-          </p>
+          <Link
+            href="/gallery"
+            className="
+              group
+              inline-flex
+              items-center
+              justify-center
+              gap-2
+              rounded-full
+              bg-[#1689d8]
+              px-6
+              py-3
+              text-sm
+              font-semibold
+              text-white
+              shadow-sm
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:bg-[#0b6eae]
+              hover:shadow-md
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#1689d8]
+              focus-visible:ring-offset-2
+              sm:px-7
+            "
+          >
+            See More
+
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
         </motion.div>
       </div>
 
-      {/* =========================
-          FLOATING IMAGE PREVIEW
-      ========================== */}
+      {/* Floating Image Preview — Desktop Only */}
       <AnimatePresence>
         {hoveredImage && (
           <motion.div
-            className="fixed top-0 left-0 z-50 pointer-events-none hidden lg:block"
-            initial={{
-              opacity: 0,
-              scale: 0.85,
-            }}
+            className="pointer-events-none fixed left-0 top-0 z-50 hidden lg:block"
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{
               opacity: 1,
               scale: 1,
               x: cursorPosition.x + 20,
               y: cursorPosition.y - 150,
             }}
-            exit={{
-              opacity: 0,
-              scale: 0.85,
-            }}
+            exit={{ opacity: 0, scale: 0.85 }}
             transition={{
               type: "spring",
               stiffness: 200,
@@ -219,13 +229,7 @@ const Gallery = () => {
               alt="Gallery preview"
               width={300}
               height={200}
-              className="
-                rounded-xl
-                shadow-2xl
-                border-2
-                border-white
-                object-cover
-              "
+              className="rounded-xl border-2 border-white object-cover shadow-2xl"
             />
           </motion.div>
         )}
