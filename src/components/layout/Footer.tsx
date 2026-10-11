@@ -8,6 +8,7 @@ import {
   FaLinkedin,
   FaEnvelope,
 } from "react-icons/fa";
+import { SiLinktree } from "react-icons/si";
 
 const Footer = () => {
   return (
@@ -111,6 +112,16 @@ const Footer = () => {
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-[#163a5c] text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:bg-blue-600 hover:text-white"
                 >
                   <FaLinkedin className="text-lg" />
+                </a>
+
+                <a
+                  href="https://linktr.ee/wikiclubtech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Linktree"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#163a5c] text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:bg-green-600 hover:text-white"
+                >
+                  <SiLinktree className="text-lg" />
                 </a>
               </div>
             </div>
