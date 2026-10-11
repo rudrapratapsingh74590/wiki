@@ -49,11 +49,11 @@ const CommunityImpact = () => {
   const [mousePositions, setMousePositions] = useState<Record<number, { x: number; y: number }>>({});
   const [valuesHovered, setValuesHovered] = useState(false);
   const [valuesMousePosition, setValuesMousePosition] = useState({ x: 50, y: 50 });
-  const handleMouseMove = (event: MouseEvent<HTMLDivElement>, index: number) => {
+  const handleMouseMove = (event: MouseEvent<HTMLElement>, index: number) => {
     const rect = event.currentTarget.getBoundingClientRect();
     setMousePositions((previous) => ({ ...previous, [index]: { x: ((event.clientX - rect.left) / rect.width) * 100, y: ((event.clientY - rect.top) / rect.height) * 100 } }));
   };
-  const handleValuesMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+  const handleValuesMouseMove = (event: MouseEvent<HTMLElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     setValuesMousePosition({ x: ((event.clientX - rect.left) / rect.width) * 100, y: ((event.clientY - rect.top) / rect.height) * 100 });
   };
