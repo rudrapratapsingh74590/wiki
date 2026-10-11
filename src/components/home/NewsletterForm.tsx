@@ -9,7 +9,9 @@ const NewsletterForm = () => {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     setSubmitting(true);
 
@@ -26,11 +28,15 @@ const NewsletterForm = () => {
         throw new Error("Subscription failed");
       }
 
-      toast.success("Thanks for subscribing! You'll hear from us soon.");
+      toast.success(
+        "Thanks for subscribing! You'll hear from us soon."
+      );
       setEmail("");
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong. Please try again later.");
+      toast.error(
+        "Something went wrong. Please try again later."
+      );
     } finally {
       setSubmitting(false);
     }
@@ -38,33 +44,21 @@ const NewsletterForm = () => {
 
   return (
     <motion.div
-      className="relative h-full w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 via-gray-900 to-slate-800 p-7 shadow-sm"
-      initial={{
-        opacity: 0,
-        y: 20,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.15,
-      }}
+      className="relative w-full overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 via-gray-900 to-slate-800 p-3 shadow-sm sm:p-4"
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{
-        duration: 0.6,
+        duration: 0.45,
         ease: [0.22, 1, 0.36, 1],
       }}
-      whileHover={{
-        y: -5,
-      }}
     >
-      {/* Decorative glow */}
       <motion.div
-        className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-sky-500/10 blur-3xl"
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-sky-500/10 blur-2xl"
         animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.4, 0.65, 0.4],
+          scale: [1, 1.1, 1],
+          opacity: [0.4, 0.6, 0.4],
         }}
         transition={{
           duration: 6,
@@ -73,95 +67,39 @@ const NewsletterForm = () => {
         }}
       />
 
-      <motion.div
-        className="absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-cyan-500/10 blur-3xl"
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.3, 0.55, 0.3],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
       <div className="relative z-10">
-        {/* Icon */}
-        <motion.div
-          className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-sky-400"
-          initial={{
-            opacity: 0,
-            scale: 0.9,
-          }}
-          whileInView={{
-            opacity: 1,
-            scale: 1,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.5,
-            delay: 0.15,
-          }}
-          whileHover={{
-            scale: 1.06,
-            rotate: -3,
-          }}
-        >
-          <FaEnvelope className="text-2xl" />
-        </motion.div>
+        <div className="flex items-center gap-2.5">
+          <motion.div
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/10 text-sky-400"
+            whileHover={{ scale: 1.05 }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 20,
+            }}
+          >
+            <FaEnvelope className="text-lg" />
+          </motion.div>
 
-        {/* Content */}
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 10,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.5,
-            delay: 0.2,
-          }}
-        >
-          <h3 className="mt-6 text-xl font-bold text-white">
-            Subscribe to our Newsletter
-          </h3>
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold leading-tight text-white sm:text-base">
+              Subscribe to our Newsletter
+            </h3>
 
-          <p className="mt-3 text-sm leading-6 text-gray-400">
-            Get the latest news, events, learning opportunities, and updates
-            from our community.
-          </p>
-        </motion.div>
+            <p className="mt-1 text-xs leading-4 text-gray-400">
+              Get the latest updates from our community.
+            </p>
+          </div>
+        </div>
 
-        {/* Form */}
         <motion.form
           onSubmit={handleSubmit}
-          className="mt-6 w-full"
-          initial={{
-            opacity: 0,
-            y: 10,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.5,
-            delay: 0.3,
-          }}
+          className="mt-3 flex w-full flex-col gap-2 sm:flex-row"
         >
-          <label htmlFor="newsletter-email" className="sr-only">
+          <label
+            htmlFor="newsletter-email"
+            className="sr-only"
+          >
             Email address
           </label>
 
@@ -172,16 +110,16 @@ const NewsletterForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            aria-label="Email address"
+            autoComplete="email"
             required
             disabled={submitting}
-            className="block w-full box-border rounded-xl border border-gray-700 bg-gray-800/80 px-4 py-3.5 text-sm text-white placeholder:text-gray-500 outline-none transition-all duration-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 disabled:cursor-not-allowed disabled:opacity-60"
+            className="box-border min-w-0 w-full flex-1 rounded-lg border border-gray-700 bg-gray-800/80 px-3 py-2.5 text-sm text-white outline-none transition-colors placeholder:text-gray-500 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 disabled:cursor-not-allowed disabled:opacity-60"
           />
 
           <motion.button
             type="submit"
             disabled={submitting}
-            className="mt-3 block w-full rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 px-4 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky-900/20 transition-all duration-200 hover:from-cyan-400 hover:to-sky-400 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full shrink-0 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:from-cyan-400 hover:to-sky-400 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
             whileHover={{
               scale: submitting ? 1 : 1.02,
             }}
@@ -198,24 +136,9 @@ const NewsletterForm = () => {
           </motion.button>
         </motion.form>
 
-        <motion.p
-          className="mt-4 text-xs text-gray-500"
-          initial={{
-            opacity: 0,
-          }}
-          whileInView={{
-            opacity: 1,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.5,
-            delay: 0.4,
-          }}
-        >
+        <p className="mt-2 text-[11px] leading-4 text-gray-500">
           Stay updated without the noise.
-        </motion.p>
+        </p>
       </div>
     </motion.div>
   );
