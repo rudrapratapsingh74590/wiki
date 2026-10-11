@@ -2,15 +2,31 @@
 
 import React, { MouseEvent, useState } from "react";
 import { motion } from "framer-motion";
-import { Code2, ArrowRight } from "lucide-react";
+import { Code2, Users, Trophy, ArrowRight } from "lucide-react";
 
-const stats = {
-  value: "45+",
-  label: "Contributions",
-  icon: Code2,
-  iconColor: "text-emerald-500",
-  iconBg: "bg-emerald-50",
-};
+const stats = [
+  {
+    value: "70+",
+    label: "Contributions",
+    icon: Code2,
+    iconColor: "text-emerald-500",
+    iconBg: "bg-emerald-50",
+  },
+  {
+    value: "600+",
+    label: "Community Members",
+    icon: Users,
+    iconColor: "text-blue-500",
+    iconBg: "bg-blue-50",
+  },
+  {
+    value: "20+",
+    label: "Achievements",
+    icon: Trophy,
+    iconColor: "text-amber-500",
+    iconBg: "bg-amber-50",
+  },
+];
 
 const WhoWeAre = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -55,7 +71,9 @@ const WhoWeAre = () => {
             </p>
 
             <a
-              href="/about"
+              href="https://meta.wikimedia.org/wiki/WikiClub_Tech_UU"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 mt-6 text-sm font-semibold text-[#1689d8] hover:text-[#0b6eae] transition-colors"
             >
               Learn More
@@ -66,52 +84,57 @@ const WhoWeAre = () => {
             </a>
           </motion.div>
 
-          <div className="flex justify-center lg:justify-end">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5 }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={() => setIsHovered(false)}
-              whileHover={{ y: -6 }}
-              className="group relative w-full max-w-[320px] min-h-[280px] rounded-3xl border border-slate-100 bg-[#f7fbff] px-8 py-10 text-center shadow-sm transition-transform duration-300"
-            >
-              <div
-                className="pointer-events-none absolute inset-0 z-0 rounded-3xl transition-opacity duration-200"
-                style={{
-                  opacity: isHovered ? 1 : 0,
-                  background:
-                    "radial-gradient(220px circle at " +
-                    mousePosition.x +
-                    "% " +
-                    mousePosition.y +
-                    "%, rgba(96, 165, 250, 0.11), transparent 72%)",
-                }}
-              />
+          <div
+            className="relative"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div
+              className="pointer-events-none absolute inset-0 z-0 rounded-3xl transition-opacity duration-200"
+              style={{
+                opacity: isHovered ? 1 : 0,
+                background:
+                  "radial-gradient(260px circle at " +
+                  mousePosition.x +
+                  "% " +
+                  mousePosition.y +
+                  "%, rgba(96, 165, 250, 0.10), transparent 72%)",
+              }}
+            />
 
-              <div className="relative z-10 flex h-full flex-col items-center justify-center">
-                <div
-                  className={
-                    "mx-auto flex h-16 w-16 items-center justify-center rounded-full " +
-                    stats.iconBg +
-                    " " +
-                    stats.iconColor
-                  }
+            <div className="relative z-10 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className="rounded-2xl border border-slate-100 bg-[#f7fbff] px-4 py-5 text-center shadow-sm sm:px-3 sm:py-6 lg:px-8 lg:py-7"
                 >
-                  <stats.icon size={28} strokeWidth={2} />
-                </div>
+                  <div
+                    className={
+                      "mx-auto flex h-12 w-12 items-center justify-center rounded-full " +
+                      stat.iconBg +
+                      " " +
+                      stat.iconColor
+                    }
+                  >
+                    <stat.icon size={23} strokeWidth={2} />
+                  </div>
 
-                <h3 className="mt-6 text-4xl font-extrabold text-[#0b2540]">
-                  {stats.value}
-                </h3>
+                  <h3 className="mt-3 text-3xl font-extrabold text-[#0b2540] sm:text-2xl lg:text-4xl">
+                    {stat.value}
+                  </h3>
 
-                <p className="mt-3 text-sm font-medium text-slate-500">
-                  {stats.label}
-                </p>
-              </div>
-            </motion.div>
+                  <p className="mt-2 text-xs font-medium text-slate-500 sm:text-[11px] lg:text-sm">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
