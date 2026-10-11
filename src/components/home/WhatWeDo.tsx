@@ -198,7 +198,7 @@ const WhatWeDo = () => {
                 >
                   <ArrowUpRight size={15} />
                 </div>
-
+                </div>
               </motion.div>
             );
           })}
