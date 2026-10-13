@@ -39,7 +39,7 @@ const HeroContent = () => {
             className="mb-7 sm:mb-8"
           >
             <Image
-              src="/WikiClub_New.png"
+              src="/wikiNewLogo.png"
               alt="WikiClub Tech - United University"
               width={865}
               height={289}
