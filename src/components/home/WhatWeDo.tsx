@@ -1,195 +1,154 @@
+
 "use client";
 
-import React, { MouseEvent, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { Code2, ArrowRight } from "lucide-react";
+import {
+  Code2,
+  BookOpen,
+  CalendarDays,
+  Lightbulb,
+  GitBranch,
+} from "lucide-react";
 
-const stats = {
-  value: "45+",
-  label: "Contributions",
-  icon: Code2,
-  iconColor: "text-emerald-500",
-  iconBg: "bg-emerald-50",
-};
+const activities = [
+  {
+    icon: Code2,
+    title: "Open Source",
+    description:
+      "Explore real open-source projects, make contributions and learn collaborative development.",
+    iconColor: "text-sky-500",
+    iconBg: "bg-sky-50",
+  },
+  {
+    icon: BookOpen,
+    title: "Workshops & Sessions",
+    description:
+      "Take part in practical workshops, technical sessions and hands-on learning activities.",
+    iconColor: "text-emerald-500",
+    iconBg: "bg-emerald-50",
+  },
+  {
+    icon: CalendarDays,
+    title: "Technical Events",
+    description:
+      "Participate in hackathons, coding activities, community events and technology-focused programs.",
+    iconColor: "text-violet-600",
+    iconBg: "bg-violet-50",
+  },
+  {
+    icon: Lightbulb,
+    title: "Projects",
+    description:
+      "Turn ideas into practical projects and experiment with technologies that solve real problems.",
+    iconColor: "text-amber-500",
+    iconBg: "bg-amber-50",
+  },
+  {
+    icon: GitBranch,
+    title: "Community Programs",
+    description:
+      "Join initiatives that encourage knowledge sharing, participation and contribution within the community.",
+    iconColor: "text-cyan-600",
+    iconBg: "bg-cyan-50",
+  },
+];
 
-const WhoWeAre = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const [mousePosition, setMousePosition] = useState({
-    x: 50,
-    y: 50,
-  });
-
-  const handleMouseMove = (
-    event: MouseEvent<HTMLDivElement>
-  ) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-
-    setMousePosition({
-      x: ((event.clientX - rect.left) / rect.width) * 100,
-      y: ((event.clientY - rect.top) / rect.height) * 100,
-    });
-  };
-
+const WhatWeDo = () => {
   return (
-    <section className="bg-white py-16 sm:py-20 lg:py-24">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -25 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-[2px] bg-emerald-500" />
-
-              <span className="text-xs font-bold tracking-[0.16em] uppercase text-slate-500">
-                About WikiClub Tech
-              </span>
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-[#0b2540]">
-              More Than Just a
-              <br />
-              <span className="text-[#1689d8]">
-                Tech Club.
-              </span>
-            </h2>
-
-            <p className="mt-5 max-w-xl text-base leading-7 text-slate-600">
-              WikiClub Tech at United University is a student-driven community
-              that empowers learners to explore open-source technologies,
-              contribute to the Wikimedia ecosystem and build real-world
-              projects together.
-            </p>
-
-            <a
-              href="/about"
-              className="
-                group
-                inline-flex
-                items-center
-                gap-2
-                mt-6
-                text-sm
-                font-semibold
-                text-[#1689d8]
-                hover:text-[#0b6eae]
-                transition-colors
-              "
-            >
-              Learn More
-
-              <ArrowRight
-                size={16}
-                className="
-                  transition-transform
-                  duration-300
-                  group-hover:translate-x-1
-                "
-              />
-            </a>
-          </motion.div>
-
-          {/* Contribution Card */}
-          <div className="flex justify-center lg:justify-end">
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-                amount: 0.2,
-              }}
-              transition={{
-                duration: 0.5,
-              }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={() => setIsHovered(false)}
-              whileHover={{
-                y: -6,
-              }}
-              className="
-                relative
-                w-full
-                max-w-[180px]
-                overflow-hidden
-                rounded-2xl
-                border
-                border-slate-100
-                bg-[#f7fbff]
-                px-5
-                py-7
-                text-center
-                shadow-sm
-                transition-transform
-                duration-300
-              "
-            >
-              {/* Cursor Following Glow */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  z-0
-                  transition-opacity
-                  duration-200
-                "
-                style={{
-                  opacity: isHovered ? 1 : 0,
-                  background: `radial-gradient(
-                    170px circle at ${mousePosition.x}% ${mousePosition.y}%,
-                    rgba(96, 165, 250, 0.11),
-                    transparent 72%
-                  )`,
-                }}
-              />
-
-              <div className="relative z-10">
-                <div
-                  className={`
-                    mx-auto
-                    flex
-                    h-12
-                    w-12
-                    items-center
-                    justify-center
-                    rounded-full
-                    ${stats.iconBg}
-                    ${stats.iconColor}
-                  `}
-                >
-                  <stats.icon
-                    size={22}
-                    strokeWidth={2}
-                  />
-                </div>
-
-                <h3 className="mt-5 text-2xl font-extrabold text-[#0b2540]">
-                  {stats.value}
-                </h3>
-
-                <p className="mt-2 text-xs leading-5 text-slate-500">
-                  {stats.label}
-                </p>
-              </div>
-            </motion.div>
+    <section
+      id="what-we-do"
+      className="bg-[#f0f8ff] py-16 sm:py-20 lg:py-24"
+    >
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+        {/* Section Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="mb-10 text-center sm:mb-12"
+        >
+          <div className="mb-3 flex items-center justify-center gap-3">
+            <span className="h-[2px] w-8 bg-[#1689d8]" />
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+              What We Do
+            </span>
+            <span className="h-[2px] w-8 bg-[#19b99a]" />
           </div>
 
+          <h2 className="text-3xl font-extrabold tracking-tight text-[#0b2540] sm:text-4xl">
+            What We Do
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+            Discover the activities, opportunities and initiatives that help
+            our community learn, build and contribute together.
+          </p>
+        </motion.div>
+
+        {/* Activity Cards */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          {activities.map((activity, index) => {
+            const Icon = activity.icon;
+
+            return (
+              <motion.div
+                key={activity.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{
+                  duration: 0.5,
+                  delay: (index % 3) * 0.08,
+                }}
+                whileHover={{ y: -4 }}
+                className="
+                  min-h-[220px]
+                  rounded-2xl
+                  border border-slate-100
+                  bg-white
+                  p-6
+                  shadow-sm
+                  transition-shadow duration-300
+                  hover:shadow-md
+                  sm:p-7
+                "
+              >
+                <div
+                  className={`
+                    flex h-12 w-12 items-center justify-center
+                    rounded-xl ${activity.iconBg} ${activity.iconColor}
+                  `}
+                >
+                  <Icon size={23} strokeWidth={1.9} />
+                </div>
+
+                <h3 className="mt-5 text-lg font-bold text-[#0b2540]">
+                  {activity.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-6 text-slate-500">
+                  {activity.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
+
+        {/* Bottom Text */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-10 text-center text-sm text-slate-500 sm:mt-12 sm:text-base"
+        >
+          Explore technology. Build projects. Contribute to the community.
+        </motion.p>
       </div>
     </section>
   );
 };
 
-export default WhoWeAre;
+export default WhatWeDo;
