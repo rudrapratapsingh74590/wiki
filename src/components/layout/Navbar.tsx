@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   FaBars,
   FaTimes,
-  FaEllipsisV,
 } from "react-icons/fa";
 
 const navItems = [
@@ -16,7 +15,7 @@ const navItems = [
   { label: "Teams", href: "/teams" },
   { label: "Events", href: "/events" },
   { label: "Achievements", href: "/contributors" },
-  { label: "Validator", href: "/validator" },
+  { label: "Certify", href: "/validator" },
   { label: "Help Desk", href: "/pyq" },
 ];
 
@@ -28,18 +27,15 @@ const menuItems = [
     href: "https://forms.gle/FGoyrEHC1CuP9hPSA",
     external: true,
   },
-];
-
-const legalItems = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms of Service", href: "/terms-of-service" },
 ];
+
 
 const Navbar = () => {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [legalOpen, setLegalOpen] = useState(false);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -49,7 +45,7 @@ const Navbar = () => {
   const closeMenus = () => {
     setMobileOpen(false);
     setMenuOpen(false);
-    setLegalOpen(false);
+
   };
 
   return (
@@ -111,7 +107,7 @@ const Navbar = () => {
                   whileTap={{ scale: 0.94 }}
                   onClick={() => {
                     setMenuOpen((prev) => !prev);
-                    setLegalOpen(false);
+
                   }}
                   className={`
                     flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200
@@ -189,50 +185,6 @@ const Navbar = () => {
                 </AnimatePresence>
               </div>
 
-              <div className="relative">
-                <motion.button
-                  type="button"
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.94 }}
-                  onClick={() => {
-                    setLegalOpen((prev) => !prev);
-                    setMenuOpen(false);
-                  }}
-                  className={`
-                    flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200
-                    ${legalOpen
-                      ? "bg-sky-50 text-sky-600"
-                      : "text-gray-500 hover:bg-sky-50 hover:text-sky-600"}
-                  `}
-                  aria-label="More options"
-                  aria-expanded={legalOpen}
-                >
-                  <FaEllipsisV className="text-sm" />
-                </motion.button>
-
-                <AnimatePresence>
-                  {legalOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -8, scale: 0.96 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -8, scale: 0.96 }}
-                      transition={{ duration: 0.18 }}
-                      className="absolute right-0 top-full mt-2 w-52 overflow-hidden rounded-xl border border-gray-100 bg-white p-1.5 shadow-xl shadow-gray-200/50"
-                    >
-                      {legalItems.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          onClick={closeMenus}
-                          className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-600 transition-all duration-200 hover:bg-sky-50 hover:text-sky-600 hover:translate-x-1"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
             </div>
           </div>
 
@@ -333,18 +285,6 @@ const Navbar = () => {
                   )}
                 </div>
 
-                <div className="mt-2 border-t border-gray-100 pt-2">
-                  {legalItems.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      onClick={closeMenus}
-                      className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-500 transition-all duration-200 hover:bg-sky-50 hover:text-sky-600 hover:translate-x-1"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
               </div>
             </motion.div>
           )}
