@@ -91,7 +91,7 @@ const HeroContent = () => {
                 whitespace-nowrap
               "
             >
-              WIKICLUBTECH-UU • 2026–27
+              WIKICLUBTECH-UU
             </span>
 
             <span className="h-[2px] w-6 sm:w-8 bg-[#19b99a]" />
