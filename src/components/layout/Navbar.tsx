@@ -27,8 +27,6 @@ const menuItems = [
     href: "https://forms.gle/FGoyrEHC1CuP9hPSA",
     external: true,
   },
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms of Service", href: "/terms-of-service" },
 ];
 
 
