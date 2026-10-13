@@ -7,6 +7,7 @@ import {
   FaInstagram,
   FaLinkedin,
   FaEnvelope,
+  FaLink,
 } from "react-icons/fa";
 
 const Footer = () => {
@@ -122,9 +123,7 @@ const Footer = () => {
                 <Link
                   href="/validator"
                   className="text-sm font-medium text-slate-300 transition-colors hover:text-cyan-300"
-                >
-                  Validator
-                </Link>
+                >Certify</Link>
 
                 <Link
                   href="/contributors"
@@ -160,17 +159,17 @@ const Footer = () => {
                 </Link>
 
                 <Link
-                  href="/privacy-policy"
+                  href="/programs"
                   className="text-sm font-medium text-slate-300 transition-colors hover:text-cyan-300"
                 >
-                  Privacy Policy
+                  Programs
                 </Link>
 
                 <Link
-                  href="/terms-of-service"
+                  href="/events"
                   className="text-sm font-medium text-slate-300 transition-colors hover:text-cyan-300"
                 >
-                  Terms of Service
+                  Events
                 </Link>
 
               </div>
@@ -260,6 +259,16 @@ const Footer = () => {
                   <FaLinkedin className="text-lg" />
                 </a>
 
+                <a
+                  href="https://linktr.ee/wikiclubtech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Linktree"
+                  title="Linktree"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#163a5c] text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:bg-emerald-600 hover:text-white"
+                >
+                  <FaLink className="text-lg" />
+                </a>
               </div>
             </div>
           </div>
@@ -269,7 +278,7 @@ const Footer = () => {
         <div className="border-t border-[#234563] py-6">
           <div className="flex items-center justify-center">
             <p className="text-sm text-slate-400 text-center">
-              © 2025 WikiClub Tech. All rights reserved.
+              © 2026 WikiClub Tech. All rights reserved.
             </p>
           </div>
         </div>
