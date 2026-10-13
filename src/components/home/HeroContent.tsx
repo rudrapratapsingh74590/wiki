@@ -38,7 +38,7 @@ const HeroContent = () => {
             className="mb-8"
           >
             <Image
-              src="/WikiClub_New.png"
+              src="/wikiNewLogo.png"
               alt="WikiClub Tech - United University"
               width={865}
               height={289}
@@ -87,7 +87,7 @@ const HeroContent = () => {
                 text-[#0b2540]
               "
             >
-              WIKICLUBTECH-UU • 2026–27
+              WIKICLUBTECH-UU
             </span>
 
             <span className="h-[2px] w-8 bg-[#19b99a]" />
@@ -109,15 +109,15 @@ const HeroContent = () => {
             }}
             className="
               max-w-full
-              text-[48px]
-              sm:text-[56px]
-              md:text-[64px]
-              lg:text-[72px]
+              text-3xl
+              sm:text-4xl
+              md:text-5xl
+              lg:text-6xl
               font-extrabold
               tracking-[-0.04em]
               leading-[0.95]
               text-[#071827]
-              whitespace-nowrap
+              break-words
             "
           >
             Build
@@ -142,16 +142,15 @@ const HeroContent = () => {
             className="
               mt-7
               max-w-3xl
-              text-[20px]
-              lg:text-[24px]
+              text-base
+              sm:text-lg
+              lg:text-xl
               font-bold
               leading-relaxed
               text-[#3f5265]
             "
           >
-            A student-driven technology community at United University —
-            learning together, building meaningful projects, and contributing
-            to open knowledge.
+            A student-driven tech community at United University, where we learn, build, and contribute together.
           </motion.p>
 
           <motion.div
