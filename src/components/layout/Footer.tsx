@@ -75,8 +75,6 @@ const Footer = () => {
 
               <div className="mt-5 flex flex-col gap-3">
                 <Link href="/pyq" className="text-sm font-medium text-slate-300 transition-colors hover:text-cyan-300">PYQ</Link>
-                <Link href="/privacy-policy" className="text-sm font-medium text-slate-300 transition-colors hover:text-cyan-300">Privacy Policy</Link>
-                <Link href="/terms-of-service" className="text-sm font-medium text-slate-300 transition-colors hover:text-cyan-300">Terms of Service</Link>
               </div>
             </div>
 
