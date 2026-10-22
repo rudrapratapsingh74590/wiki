@@ -47,6 +47,10 @@ const menuItems = [
     href: "/blogs",
   },
   {
+    label: "Gallery",
+    href: "/gallery",
+  },
+  {
     label: "Join Us",
     href: "https://forms.gle/FGoyrEHC1CuP9hPSA",
     external: true,
@@ -63,6 +67,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setMobileOpen(false);
+      setMenuOpen(false);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
