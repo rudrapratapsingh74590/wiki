@@ -54,45 +54,6 @@ const HeroContent = () => {
             />
           </motion.div>
 
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 10,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.6,
-              delay: 0.15,
-            }}
-            className="
-              flex
-              items-center
-              justify-center
-              gap-3
-              mb-5
-            "
-          >
-            <span className="h-[2px] w-8 bg-[#1689d8]" />
-
-            <span
-              className="
-                text-xs
-                sm:text-sm
-                font-bold
-                tracking-[0.2em]
-                uppercase
-                text-[#0b2540]
-              "
-            >
-              WIKICLUBTECH-UU
-            </span>
-
-            <span className="h-[2px] w-8 bg-[#19b99a]" />
-          </motion.div>
-
           <motion.h1
             initial={{
               opacity: 0,
